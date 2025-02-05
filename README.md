@@ -15,7 +15,7 @@
 - ***Daniel Padrigo*** - [GITHUB](https://github.com)
 
 ---
-***## Before anything else! Please, branch out from main.***
+***Before anything else! Please, branch out from main.***
 ---
 
 
