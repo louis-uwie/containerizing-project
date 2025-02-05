@@ -1,35 +1,63 @@
-__ORIGINAL MEMBERS & GITHUB:__
-Louis G. Binwag III - louis-uwie 
-Jean Maximus C. Cacacho - jeanmaxcacacho 
-Paco Antonio V. Zabala - Pacozabala
-Ysaac Rainier Mesa - Ysaac12
+# ISCS 30.23 - Containerizing Applications
 
-__AS OF FEB 2, 2025__ - @louis-uwie is repurposing this
-repository for ISCS 30.23 Containerizing Applications.
+## Original Members & GitHub Handles
+- **Louis G. Binwag III** - [louis-uwie](https://github.com/louis-uwie)  
+- **Jean Maximus C. Cacacho** - [jeanmaxcacacho](https://github.com/jeanmaxcacacho)  
+- **Paco Antonio V. Zabala** - [Pacozabala](https://github.com/Pacozabala)  
+- **Ysaac Rainier Mesa** - [Ysaac12](https://github.com/Ysaac12)  
 
-__Project Set Up__
-Clone the repository into your designated directory.
-Inside this directory:
-'''git clone <url>'''
+## Repository Update (As of Feb 2, 2025)
+@louis-uwie is repurposing this repository for **ISCS 30.23 - Containerizing Applications**.
 
-Get into this repository folder.
-'''cd /repository'''
+---
 
-Create and activate python virtual environment
-'''python -m venv myenv
-venv\Scripts\activate #Windows
-source venv/bin/activate #Mac/Linux
-'''
+## Project Setup
 
-Once activated, install dependencies
-'''pip install --upgrade pip
+### 1. Clone the Repository
+Clone the repository into your designated directory:
+```bash
+git clone <repository_url>
+```
+
+Move into the project folder:
+```bash
+cd repository
+```
+
+### 2. Create & Activate a Virtual Environment
+Create a virtual environment:
+```bash
+python -m venv myenv
+```
+
+Activate the virtual environment:
+- **Windows:**
+  ```bash
+  myenv\Scripts\activate
+  ```
+- **Mac/Linux:**
+  ```bash
+  source myenv/bin/activate
+  ```
+
+### 3. Install Dependencies
+Upgrade `pip` and install project dependencies:
+```bash
+pip install --upgrade pip
 pip install -r requirements.txt
-'''
+```
 
-Applying django migrations and running development server.
-''' python manage.py migrade #migrating necessary files / data
-python manage.py runserver'''
+### 4. Apply Migrations & Run Development Server
+Run database migrations:
+```bash
+python manage.py migrate  # Applying necessary migrations
+```
 
-For more information: https://docs.djangoproject.com/en/5.1/
+Start the development server:
+```bash
+python manage.py runserver
+```
 
-
+### Documentation
+For more details, refer to the official Django documentation:  
+[Django Docs](https://docs.djangoproject.com/en/5.1/)
