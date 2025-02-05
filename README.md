@@ -12,6 +12,7 @@
 ## Co-Editors (As of Feb 2, 2025)
 - ***Ciana Magtipon*** - [cianamagtipon](https://github.com/cianamagtipon)
 - ***John Gabriel A. Madriaga*** - [jgmad](https://github.com/jgmad)
+- ***Daniel Padrigo*** - [GITHUB](https://github.com)
 
 ---
 
