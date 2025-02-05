@@ -4,3 +4,4 @@ db.sqlite3
 *~
 #*
 hobbysite/media/*
+/myenv
