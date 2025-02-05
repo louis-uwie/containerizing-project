@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Cart</title>
+{% endblock title %}
+
+{% block header %}
+    <h1>Cart</h1>
+{% endblock header %}
+
+{% block content %}
+    {% for owner, transactions in grouped_transactions.items %}
+        <h2>{{ owner }}</h2>
+        <ul>
+            {% for transaction in transactions %}
+                <li>{{ transaction.product.name }} - {{ transaction.amount }}</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+    <hr>
+    <a href="{% url 'merchstore:product_list' %}">Go back</a>
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Update Product</title>
+{% endblock title %}
+
+{% block header %}
+    <h1>Update Product</h1>
+{% endblock header %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="hidden" name="status" value="{% if product.stock > 0 %}Available{% else %}Out of stock{% endif %}">
+        <button type="submit">Save</button>
+    </form>
+{% endblock content %}

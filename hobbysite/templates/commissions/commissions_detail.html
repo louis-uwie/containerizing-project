@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %} Hobbysite | Commission Detail {% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <fieldset>
+
+            <legend><h3>{{ commission.title }} Detail</h3></legend>
+                {% if user.profile == commission.owner %}
+                    <a href="{% url 'commissions:commission-update' commission.id %}">Edit Commission</a>
+                {% endif %}
+
+                <p><strong>Description:</strong> {{ commission.description }}</p>
+                <p><strong>Status:</strong> {{ commission.get_status_display }}</p>
+                <p><strong>Created On:</strong> {{ commission.created_on }}</p>
+                <p><strong>Updated On:</strong> {{ commission.updated_on }}</p>
+
+        </fieldset>
+
+        <fieldset>
+            
+            <legend> <h3>List of Jobs</h3> </legend>
+                <p><strong>Roles:</strong>
+                <dl>
+                    {% for job in commission.jobs.all %}
+                        <dd>{{ job.role }} - {{ job.people_required }} people required</dd>
+                    {% endfor %}
+                </dl>
+
+                <p><strong>Total Manpower Required:</strong> {{ total_manpower_required }}</p>
+                <p><strong>Approved Signees:</strong> {{ approved_signees }}</p>
+                <p><strong>Available Slots:</strong> {{ open_manpower }}</p>
+                <p><strong>Job Status:</strong></p>
+
+                <dl>
+                    {% for job in commission.jobs.all %}
+                        <dd>{{ job.role }} - {{ job.get_status_display }}</dd>
+                    {% endfor %}
+                </dl>
+
+        </fieldset>
+
+        {% if open_manpower > 0 %}
+        <fieldset>
+            <legend> <h3>Apply to Job</h3>  </legend>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="hidden" name="job_id" value="{{ job.id }}">
+                    <button type="submit">Apply</button>
+                </form>
+        {% elif commission.status == 'F' %}
+                <p>This job is Full</p>
+        {% else %}
+            <p>All manpower requirements for this commission have been fulfilled.</p>
+        {% endif %}
+    {% else %}
+        <p>Please <a href="{% url 'login' %}">log in</a> to apply to jobs.</p>
+    {% endif %} 
+
+    <br> <a href="{% url 'commissions:commission-list' %}">Back to list</a>
+        </fieldset>
+{% endblock %}

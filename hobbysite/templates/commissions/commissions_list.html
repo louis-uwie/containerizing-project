@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+    {% block title %} Hobbysite | Commissions List {% endblock %}
+
+    {% block content %}
+
+        <h1>Welcome to Commissions App</h1> <br>
+        <a href="{% url 'commissions:commission-create' %}">Add Commissions</a>
+
+        {% if user.is_authenticated %}
+            <h2>My Commissions</h2>
+            {% for commission in user.profile.owner.all %}
+                <fieldset>
+                    <legend><h4>{{ commission.title }}</h4></legend>
+                    <h5>Status: {{ commission.get_status_display }}</h5>
+                    <dl>
+                        <dd>Created On: {{ commission.created_on }}</dd>
+                        <dd>Updated On: {{ commission.updated_on }}</dd>
+                        <dd>Description: {{ commission.description }}</dd>
+                        <br>
+                        <dt><a href="{% url 'commissions:commission-detail' commission.pk %}">View Detail</a></dt>
+                    </dl>
+                </fieldset>
+            {% endfor %}
+            <h2>Applied Commissions</h2>
+                {% for application in user.profile.job.all %}
+                <fieldset>
+                    <p><strong>Role:</strong>{{ application.job.role }}</p>
+                    <p> <strong>Status:</strong> {{ application.get_status_display }} </p>  
+                </fieldset>
+                {% endfor %}
+        {% endif %}
+    
+        <h2>All Commission</h2>
+        {% for commission in commissions %}
+        <fieldset>
+            <legend><h4>{{ commission.title }}</h4></legend>
+            <h4> Status: {{commission.get_status_display}} </h4>
+                    <dl>
+                        <dd> Created On: {{commission.created_on}} </dd>
+                        <dd> Updated On: {{commission.updated_on}} </dd>
+                        <dd> Description: {{commission.description}} </dd>
+                        <br>
+                        <dt><a href="{% url 'commissions:commission-detail' commission.pk %}"> View Detail </a> </dt>
+                    </dl>
+        </fieldset>
+        {% endfor %}
+    {% endblock %}

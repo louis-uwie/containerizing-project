@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Hobbysite Home</title>
+{% endblock title %}
+
+
+{% block styles %}
+<!-- for when Max learns bootstrap -->
+{% endblock styles %}
+
+
+{% block header %}
+{% if user.is_authenticated %}
+<h1>Hello {{ user.username }}!</h1>
+<a href="{% url 'user_management:profile_update' %}">Update Profile</a>
+<a href="{% url 'homepage:dashboard' %}">Profile Dashboard</a>
+    {% if user.profile.display_picture %}
+        <p></p>
+        <p></p>
+        <p></p>
+        <img src="{{ user.profile.display_picture.url }}" alt="{{ user.profile.display_name }}'s display picture." width=200 height=200>
+    {% endif %}
+{% else %}
+<h1>Hello stranger!</h1>
+{% endif %}
+{% endblock header %}
+
+
+{% block content %}
+<h2>So what do you want to do today?</h2>
+<ul>
+    <li><a href="{% url 'blog:article-list' %}">
+        Hobbysite Blog
+    </a></li>
+    <li><a href="{% url 'commissions:commission-list' %}">
+        Hobbysite Commissions
+    </a></li>
+    <li><a href="{% url 'merchstore:product_list' %}">
+        Hobbysite Store
+    </a></li>
+    <li><a href="{% url 'wiki:article_list' %}">
+        Hobbysite Wiki
+    </a></li>
+</ul>
+{% endblock content %}

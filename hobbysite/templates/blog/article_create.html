@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Write an Article{% endblock %}
+
+{% block content %}
+    <h1>Write an Article</h1>
+    <p>Fill out the fields below:</p>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+    </form>
+    <a href="{% url 'blog:article-list' %}">Back to Article List</a>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %} Create Commission {% endblock %}
+
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    
+    <!-- Commission Form -->
+    <fieldset>
+        <legend><h1>Add Commission</h1></legend>
+        {{ commission_form.as_p }}
+    </fieldset>
+  
+    <!-- Job Form -->
+    <fieldset>
+      <legend><h1>Add Job</h1></legend>
+      {{ job_form.as_p }}
+    </fieldset>
+
+    <button type="submit">Submit</button>
+  </form> <br>
+  
+<a href="{% url 'commissions:commission-list' %}">Back to List</a>
+{% endblock %}
+
+

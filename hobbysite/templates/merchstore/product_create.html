@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Create Product Listing</title>
+{% endblock title %}
+
+{% block content %}
+<h1>Make Your Listing!</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="SUBMIT">Create</button>
+    </form>
+{% endblock content %}

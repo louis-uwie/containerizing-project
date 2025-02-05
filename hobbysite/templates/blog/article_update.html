@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Update {{ article.name }}{% endblock %}
+
+{% block content %}
+    <h1>Update {{ article.name }}</h1>
+    <p>Update the fields below:</p>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Update">
+    </form>
+    <a href="{% url 'blog:article-detail' pk=article.pk %}">Return to {{ article.name }}</a>
+
+{% endblock %}

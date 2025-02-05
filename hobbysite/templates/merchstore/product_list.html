@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>Hobbysite Merchstore</title>
+{% endblock title %}
+
+{% block styles %}
+<!-- For when future Max learns a frontend framework -->
+{% endblock styles %}
+
+{% block header %}
+<h1>Welcome to the Hobbysite merch store!</h1>
+<h2>All proceeds go to starving children in Africa.</h2>
+<img src="" alt="">
+<a href="{% url 'merchstore:product_create' %}">Create a Product Listing</a>
+<a href="{% url 'merchstore:transactions' %}">See your transaction history</a>
+<br>
+{% endblock header %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h1>Your Listings</h1>
+<ul>
+    {% for product_type in product_types %}
+    <li><strong>
+        {{ product_type.name }}
+    </li></strong>
+    <p>
+        {{ product_type.description }}
+    </p>
+    <ul>
+        {% for product in product_type.products.all %}
+            {% if product.owner.user.username == user.username %}
+            <li>
+                <a href="{% url 'merchstore:product_detail' product.pk %}">
+                    {{ product.name }}
+                </a>
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% endfor %}
+</ul>
+<br>
+<h1>Product List</h1>
+<ul>
+    {% for product_type in product_types %}
+    <li><strong>
+        {{  product_type.name }}
+    </li></strong>
+    <p>
+        {{ product_type.description }}
+    </p>
+    <ul>
+        {% for product in product_type.products.all %}
+            {% if product.owner.user.username != user.username %}
+            <li>
+                <a href="{% url 'merchstore:product_detail' product.pk %}">
+                    {{ product.name }}
+                </a>
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% endfor %}
+</ul>
+
+{% else %}
+<!-- just put all product instances -->
+<h1>Product List</h1>
+<ul>
+{% for product_type in product_types %}
+    <li><strong>
+        {{ product_type.name }}
+    </li></strong>
+    <p>
+        {{ product_type.description }}
+    </p>
+    <ul>
+        {% for product in product_type.products.all %}
+        <li>
+            <a href="{% url 'merchstore:product_detail' product.pk %}">
+                {{ product.name }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endfor %}
+</ul>
+{% endif %}
+{% endblock content %}

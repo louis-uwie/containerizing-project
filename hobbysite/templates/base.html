@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+	<html lang='en'>
+		<head>
+			<meta charset="UTF-8">
+			{% block title %}{% endblock title %}
+
+			{# this/these is/are the main parent style/styles #}
+			{# Schrodinger's grammar btw #}
+			<link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+			{# the styles block is for page specific styles #}
+			{% block styles %}{% endblock styles %}
+		</head>
+
+		<body>
+			<header>
+				{% if user.is_authenticated %}
+					{# Django has a default url named login included in django.contrib.auth.urls #}
+					{# in our case logging out will lead the user back to the home page but this time they should be unauthenticated #}
+					{# I don't think this was discussed in class but we leverage the default logout url in django.contrib.auth.urls #}
+					<form method="POST" action="{% url 'logout' %}">
+						{% csrf_token %}
+						{{ login_form.as_p }} {# Change form to login_form here #}
+						<button type="SUBMIT">Logout</button>
+					</form>
+					{% url 'homepage:home' as home_url %}
+					{% if request.path != home_url %}
+						<a href="{% url 'homepage:home' %}">Back to Home</a>
+					{% endif %}
+				{% else %}
+					<a href="{% url 'login' %}">Login</a>
+					{% if request.path != home_url %}
+						<a href="{% url 'homepage:home' %}">Back to Home</a>
+					{% endif %}
+				{% endif %}
+
+				{% block header %}{% endblock header %}
+			</header>
+
+			<main>
+				{% block content %}{% endblock content %}
+			</main>
+		</body>
+	</html>

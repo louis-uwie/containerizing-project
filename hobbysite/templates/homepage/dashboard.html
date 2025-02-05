@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>{{ user_profile.display_name }}'s Dashboard</title>
+{% endblock title %}
+
+{% block header %}
+<h1>Welcome to your dashboard {{ user_profile.display_name }}!</h1>
+{% endblock header %}
+
+{% block content %}
+<h2>Products Bought</h2>
+{% if products_bought %}
+    <ul>
+        {% for transaction in products_bought %}
+            <li>{{ transaction.product.name }} -- {{ transaction.product.amount }} -- {{ transaction.created_on }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h3>You haven't bought any products yet.</h3>
+{% endif %}
+
+<h2>Products Sold</h2>
+{% if products_sold %}
+    <ul>
+        {% for transaction in products_sold %}
+            <li>{{ transaction.product.name }} -- {{ transaction.product.amount }} -- {{ transaction.created_on }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h3>You haven't sold any products yet.</h3>
+{% endif %}
+
+<h2>Commissions Created</h2>
+{% if commissions_created %}
+    <ul>
+        {% for commission in commissions_created %}
+            <li>{{ commission.title }} --  {{ commission.updated_on }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h3>You haven't created any commissions yet.</h3>
+{% endif %}
+
+<h2>Commissions Joined</h2>
+{% if commissions_joined %}
+    <ul>
+        {% for commission in commissions_joined %}
+            <li>{{ commission.job.commission.title }} --  {{ commission.job.commission.updated_on }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h3>You haven't joined any commissions yet.</h3>
+{% endif %}
+
+<h2>Wiki Articles Created</h2>
+{% if wiki_articles %}
+    <ul>
+        {% for article in wiki_articles %}
+            <li>{{ article.title }} -- {{ article.updated_on }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h3>You haven't written any wiki articles yet.</h3>
+{% endif %}
+
+<h2>Blog Articles Created</h2>
+{% if blog_articles %}
+    <ul>
+        {% for article in blog_articles %}
+            <li>{{ article.title }} -- {{ article.updated_on }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h3>You haven't written any blog articles yet.</h3>
+{% endif %}
+<hr>
+<a href="{% url 'homepage:home' %}">Go back</a>
+{% endblock content %}

@@ -1,0 +1,17 @@
+body, h1, h2, h3, h4, h5, h6, p {
+    font-family: "Century Gothic", sans-serif;
+}
+
+header {
+    background-color: #ffd1dc;
+    color: #333;
+    padding: 20px;
+    margin: 50px;
+}
+
+body {
+    background-color: #add8e6;
+    color: #333; 
+    padding: 20px;
+    margin: 50px;
+}

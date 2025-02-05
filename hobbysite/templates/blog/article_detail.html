@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ article.name }}{% endblock %}
+
+{% block header %}
+{% if article.header_image %}
+    <img src="{{ article.header_image.url }}" alt="">
+{% endif %}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ article.name }}</h1>
+    <p>Category: {{ article.category }}</p>
+    <p>
+        Created on {{ article.created_on }}, Last updated on {{ article.updated_on }}
+    </p>
+    <p>{{ article.entry }}</p>
+
+    {% if user.is_authenticated %}
+        {% if article.author.user == user %}
+            <p>
+                <a href="{% url 'blog:article-update' pk=article.pk %}">
+                    Edit this Article
+                </a>
+            </p>
+        {% endif %}
+    {% endif %}
+
+    <!--other articles by author-->
+    <h3>Other Articles by {{ article.author }}</h3>
+    {% for a in author_articles %}
+        <li>
+            <a href="{% url 'blog:article-detail' pk=a.pk %}">{{ a.name }}</a>
+        </li>
+    {% endfor %}
+    <br>
+
+    <p>
+        <a href="{% url 'blog:article-list' %}">Return to articles list</a>
+    </p>
+
+    <h3>Comments</h3>
+    {% if user.is_authenticated %}
+        <p>Post a comment.</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Submit">
+        </form>
+    {% endif %}
+    {% for c in article.comment.all %}
+        <p>
+            {{ c.author }}<br>
+            {{ c.entry }}<br>
+            Posted {{ c.created_on }}
+        </p>
+    {% endfor %}
+
+{% endblock %}

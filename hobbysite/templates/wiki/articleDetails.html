@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Hobbysite | Online Wiki App{% endblock %}
+
+{% block content %}
+    <p><a href="{% url 'wiki:article_list' %}">← Back to Article List</a></p>
+
+    <div id="user-info">
+        <p><b>Logged in:</b> {{ request.user }} <br></p>
+    </div>
+
+    <h1>Article Detail</h1>
+
+    <div>
+        <hr>
+
+        <!-- ARTICLE TITLE-->
+        <h2>{{ article.title }}</h2>
+
+        <!-- DISPLAY HEADER IMAGE-->
+        {% if article.header_image %}
+            <img src="{{ article.header_image.url }}" alt="{{ article.title }} Image" style="max-width: 25%;">
+        {% endif %} <br>
+        
+        <!-- EDIT CURRENT ARTICLE, IF USER LOGGED IN IS THE AUTHOR -->
+        {% if user.is_authenticated and request.user.profile == article.author %}
+            <a href="{% url 'wiki:article_edit' article.pk %}">Edit This Article</a>
+        {% endif %}
+
+        <!-- ARTICLE DETAILS-->
+        <p>
+            <b>Author:</b> {{ article.author }} <br>
+            <b>Article Created:</b> {{ article.created_on }} <br>
+            <b>Article Updated:</b> {{ article.updated_on }}
+        </p>
+
+        <hr>
+
+        <p>{{ article.entry|linebreaks }}</p>
+    </div>
+
+    <!-- COMMENTS DISPLAY-->
+    <div>
+        <h2>Comments</h2>
+        {% for comment in article.comments.all %}
+            <div>
+                <p><i>{{ comment.entry }}</i> <br>
+                By {{ comment.author.username }} on {{ comment.created_on }}</p>
+                Edited last on {{ comment.updated_on }}
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+
+    <hr>
+    
+    <!-- ADD COMMENT FORM TO CREATECOMMENTVIEW-->
+    <h2>Add a Comment</h2>
+    <form method="post" action="{% url 'wiki:comment_create' article.pk %}">
+        {% csrf_token %}
+        <textarea name="entry" rows="4" cols="50" placeholder="Enter your comment"></textarea>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+{% endblock %}
