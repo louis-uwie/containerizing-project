@@ -9,7 +9,7 @@
 ## Repository Update (As of Feb 2, 2025)
 @louis-uwie is repurposing this repository for **ISCS 30.23 - Containerizing Applications**.
 
-## Original Members & GitHub Handles
+## Co-Editors (As of Feb 2, 2025)
 - ***Ciana Magtipon*** - [cianamagtipon](https://github.com/cianamagtipon)
 
 ---
