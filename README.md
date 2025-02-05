@@ -11,6 +11,7 @@
 
 ## Co-Editors (As of Feb 2, 2025)
 - ***Ciana Magtipon*** - [cianamagtipon](https://github.com/cianamagtipon)
+- ***John A. Gabriel*** - [jgmad](https://github.com/jgmad)
 
 ---
 
