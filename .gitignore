@@ -1,8 +1,10 @@
 db.sqlite3
+
 .env
 .env.txt
+/myenv
+
 **/**/__pycache__/
 *~
 #*
 hobbysite/media/*
-/myenv
